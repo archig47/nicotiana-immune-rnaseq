@@ -1,0 +1,2 @@
+"baseMean","log2FoldChange","lfcSE","pvalue","padj","gene_id","protein_id","protein_length","type","domain_arch","matched_rules","has_sp","tm_count","ecto_length","has_kinase"
+306.252008190076,3.03549169828399,0.864099226706175,1.45022354951795e-05,0.00285173085164433,"NbT2T06g03563","NbT2T06g03563-mRNA",291,"Secreted","(SP)(LLEC)","Secreted,LLEC","True",0,272,"False"

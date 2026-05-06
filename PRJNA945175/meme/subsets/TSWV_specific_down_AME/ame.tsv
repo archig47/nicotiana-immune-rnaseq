@@ -1,0 +1,20 @@
+rank	motif_DB	motif_ID	motif_alt_ID	consensus	p-value	adj_p-value	E-value	tests	FASTA_max	pos	neg	PWM_min	TP	%TP	FP	%FP
+1	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	bZIP_tnt.bZIP16_col_v3a_m1	bZIP16	DDWKSHSACGTGGCA	5.65e-6	6.32e-4	5.51e-1	112	36	36	1252	124	7	19.44	21	1.68
+2	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	bZIP_tnt.bZIP16_colamp_a_m1	bZIP16	DWWGVTSACGTGGCA	7.30e-6	8.68e-4	7.57e-1	119	36	36	1252	52.2	7	19.44	22	1.76
+3	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	bZIP_tnt.bZIP68_col_a_m1	bZIP68	TGCCACGTSABCWHH	5.65e-6	8.75e-4	7.63e-1	155	36	36	1252	56.5	7	19.44	21	1.68
+4	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	bZIP_tnt.ABI5_col_v3h_m1	ABI5	DDDWGRWSACGTGGCANH	9.07e-6	9.06e-4	7.90e-1	100	36	36	1252	254	6	16.67	14	1.12
+5	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	bZIP_tnt.GBF3_col_m1	GBF3	TGCCACGTCABCWWH	9.33e-6	9.70e-4	8.45e-1	104	36	36	1252	29.9	7	19.44	23	1.84
+6	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	bZIP_tnt.ABF2_col_v3a_m1	ABF2	DWWWNTGCCACGTSWCCW	1.18e-5	1.18e-3	1.03e0	100	36	36	1252	118	7	19.44	24	1.92
+7	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	bZIP_tnt.ABI5_colamp_v3b_m1	ABI5	DDTGRWSACGTGGCA	1.24e-5	1.22e-3	1.06e0	98	36	36	1252	189	6	16.67	15	1.20
+8	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	bZIP_tnt.GBF3_colamp_m1	GBF3	DNWKNHSACGTGGCA	1.24e-5	2.81e-3	2.45e0	226	36	36	1252	74.1	6	16.67	15	1.20
+9	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	bZIP_tnt.bZIP28_col_a_m1	bZIP28	DNWKRTSACGTGGCA	1.84e-5	2.87e-3	2.50e0	156	36	36	1252	34.8	7	19.44	26	2.08
+10	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	bZIP_tnt.AREB3_colamp_a_m1	AREB3	DDWGGWSACGTGGCA	3.74e-5	3.29e-3	2.87e0	88	36	36	1252	221	6	16.67	19	1.52
+11	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	bZIP_tnt.GBF6_colamp_a_m1	GBF6	DWWGVTGACGTGGCA	2.27e-5	3.74e-3	3.27e0	165	36	36	1252	19	7	19.44	27	2.16
+12	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	bZIP_tnt.AREB3_col_v31_m1	AREB3	DDWGGWSACGTGGCA	6.00e-5	5.39e-3	4.70e0	90	36	36	1252	190	6	16.67	21	1.68
+13	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	bZIP_tnt.GBF5_colamp_a_m1	GBF5	DWTGCTGACGTGGCA	8.25e-5	5.43e-3	4.73e0	66	36	36	1252	5.17	7	19.44	34	2.72
+14	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	bHLH_tnt.bHLH31_col_m1	bHLH31	VWBDWVNCACGTGBNHNWSWC	3.30e-5	7.78e-3	6.78e0	237	36	36	1252	17.9	8	22.22	41	3.27
+15	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	bZIP_tnt.GBF5_col_v3a_m1	GBF5	DWTGCTGACGTGGCA	1.32e-4	9.09e-3	7.92e0	69	36	36	1252	3.56	7	19.44	37	2.96
+
+# AME (Analysis of Motif Enrichment): Version 5.5.8 compiled on May 19 2025 at 08:59:39
+# The format of this file is described at https://meme-suite.org/meme/doc/ame-output-format.html.
+# ame --oc /users/fyp/fyp5/project/PRJNA945175/meme/subsets/TSWV_specific_down_AME --scoring avg --method fisher --hit-lo-fraction 0.25 --evalue-report-threshold 10.0 --control /users/fyp/fyp5/project/PRJNA945175/promoters/all_PRR_promoters_2kb.fa --kmer 2 /users/fyp/fyp5/project/PRJNA945175/promoters/subsets/TSWV_specific_down_promoters_2kb.fa /users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme

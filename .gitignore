@@ -1,0 +1,67 @@
+# Large sequencing data
+PRJNA945175/aligned/
+PRJNA945175/raw/
+PRJNA945175/trimmed/
+PRJNA945175/featurecounts/
+PRJNA945175/featurecounts_multimapper/
+PRJNA945175/multiqc_trimmed/
+PRJNA945175/multiqc_raw/
+PRJNA945175/falco_raw/
+PRJNA945175/falco/
+PRJNA945175/logs/
+
+# Large genome files
+genome/STAR_index_softmasked/
+genome/jiorgos/
+genome/motif_databases/
+
+# File type exclusions
+*.fa
+*.fasta
+*.fastq
+*.fastq.gz
+*.bam
+*.bam.bai
+*.sam
+*.gz
+*.zip
+*.featureCounts
+*.summary
+*.html
+logo*.png
+logo*.eps
+.Rhistory
+.RData
+*.Rproj
+__pycache__/
+*.pyc
+
+# Annotation and database files
+*.gtf
+*.gff
+*.gff3
+*.tgz
+*.faa
+*.pdb
+*.phr
+*.pin
+*.pjs
+*.pot
+*.psq
+*.ptf
+*.pto
+
+# R binary objects
+*.rds
+
+# QC output directories (hundreds of small files)
+GSE201377/falco_out/
+GSE201377/multiqc_falco/
+GSE201377/multiqc_falco_trimmed/
+GSE201377/multiqc_final/
+
+# Log and misc files
+*.log
+*.pid
+nohup.out
+*.bed

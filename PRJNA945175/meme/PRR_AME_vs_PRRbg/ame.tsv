@@ -1,0 +1,4 @@
+
+# AME (Analysis of Motif Enrichment): Version 5.5.8 compiled on May 19 2025 at 08:59:39
+# The format of this file is described at https://meme-suite.org/meme/doc/ame-output-format.html.
+# ame --oc /users/fyp/fyp5/project/PRJNA945175/meme/PRR_AME_vs_PRRbg --scoring avg --method fisher --hit-lo-fraction 0.25 --evalue-report-threshold 10.0 --control /users/fyp/fyp5/project/PRJNA945175/promoters/all_PRR_promoters_2kb.fa --kmer 2 /users/fyp/fyp5/project/PRJNA945175/promoters/DEG_PRR_promoters_2kb.fa /users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme

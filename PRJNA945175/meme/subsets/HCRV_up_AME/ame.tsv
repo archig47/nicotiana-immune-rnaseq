@@ -1,0 +1,8 @@
+rank	motif_DB	motif_ID	motif_alt_ID	consensus	p-value	adj_p-value	E-value	tests	FASTA_max	pos	neg	PWM_min	TP	%TP	FP	%FP
+1	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	WRKY_tnt.WRKY59_col_a_m1	WRKY59	HAAAAGTCAAMN	1.12e-5	6.90e-3	6.02e0	617	109	109	1252	2.27	46	42.20	283	22.60
+2	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	WRKY_tnt.WRKY26_col_a_m1	WRKY26	AAAAGTCAACGNY	2.34e-5	7.54e-3	6.58e0	324	109	109	1252	3.31	24	22.02	103	8.23
+3	/users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme	WRKY_tnt.WRKY28_col_a_m1	WRKY28	DDCGTTGACTTTT	1.77e-5	9.08e-3	7.91e0	516	109	109	1252	7.89	15	13.76	42	3.35
+
+# AME (Analysis of Motif Enrichment): Version 5.5.8 compiled on May 19 2025 at 08:59:39
+# The format of this file is described at https://meme-suite.org/meme/doc/ame-output-format.html.
+# ame --oc /users/fyp/fyp5/project/PRJNA945175/meme/subsets/HCRV_up_AME --scoring avg --method fisher --hit-lo-fraction 0.25 --evalue-report-threshold 10.0 --control /users/fyp/fyp5/project/PRJNA945175/promoters/all_PRR_promoters_2kb.fa --kmer 2 /users/fyp/fyp5/project/PRJNA945175/promoters/subsets/HCRV_up_promoters_2kb.fa /users/fyp/fyp5/project/genome/motif_databases/ARABD/ArabidopsisDAPv1.meme
