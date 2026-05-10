@@ -1,0 +1,2 @@
+"query","significant","p_value","term_size","query_size","intersection_size","precision","recall","term_id","source","term_name","effective_domain_size","source_order","parents"
+"query_1",TRUE,0.016135507884027,230,32,15,0.46875,0.0652173913043478,"GO:0004672","PRR_custom","GO:0004672",1124,12,
