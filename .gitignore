@@ -1,0 +1,6 @@
+results/
+.snakemake/
+*.log
+data/reads/
+*.pdf
+*.png

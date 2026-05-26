@@ -1,0 +1,17 @@
+samples: "samples.csv"
+genome:
+  fasta: "ref/NbT2T.fa"
+  gtf: "ref/NbT2T.gtf"
+  star_index: "ref/STAR_index"
+trim_galore:
+  quality: 20
+  length: 30
+  stringency: 3
+star:
+  genome_sa_index_nbases: 14
+  sjdb_overhang: 100
+featureCounts:
+  strandedness: 2
+deseq2:
+  lfc_threshold: 1
+  padj_threshold: 0.05
