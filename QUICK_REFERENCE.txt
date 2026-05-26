@@ -1,0 +1,215 @@
+# QUICK REFERENCE: Autonomous RNA-seq Agent
+
+## The 3-Minute Version
+
+You have a **Claude AI agent** that will:
+1. **GENERATE** a complete Snakemake RNA-seq pipeline
+2. **VALIDATE** it on real data (Pombo 2019, 6 samples)
+3. **OPTIMIZE** parameters and choose the best ones
+
+---
+
+## How to Invoke It (Right Now)
+
+```bash
+# 1. Go to your project
+cd ~/rna-seq-pipeline-project
+
+# 2. Option A: Use the helper script (easiest)
+bash invoke-rna-seq-agent.sh
+# Tells you what to copy/paste
+
+# Option B: Manual
+cat autonomous-rna-seq-agent-prompt.md | pbcopy    # macOS
+cat autonomous-rna-seq-agent-prompt.md | xclip ... # Linux
+
+# 3. Open Claude
+claude
+
+# 4. Paste the content into Claude and hit ENTER
+
+# 5. Wait 10-15 minutes for Claude to generate
+
+# 6. Extract the generated files (7 files total)
+
+# 7. Commit to git
+git add -A && git commit -m "Agent-generated pipeline"
+```
+
+---
+
+## What Gets Generated
+
+| File | Purpose | Size |
+|------|---------|------|
+| **Snakefile** | Complete RNA-seq workflow | 200-400 lines |
+| **config.yaml** | All parameters (editable) | 80-150 lines |
+| **environment.yml** | Conda deps (reproducible) | 25-40 lines |
+| **README.md** | Full documentation | 100-200 lines |
+| **test_data.sh** | Download test data | 50-80 lines |
+| **VALIDATION_CHECKLIST.md** | Pass/fail criteria | 150-200 lines |
+| **.gitignore** | Git ignore rules | 20-30 lines |
+
+---
+
+## Validation Checklist (What Success Looks Like)
+
+After QC:
+- ✅ All samples >10M reads
+- ✅ GC content 45-48%
+- ✅ Duplicates 37-64% (normal!)
+
+After Trimming:
+- ✅ Read retention >70%
+- ✅ Post-trim length >30bp
+
+After Alignment (STAR):
+- ✅ Mapping rate >80%
+- ✅ Strandedness confirmed (reverse)
+
+After Counting (featureCounts):
+- ✅ >95% reads assigned
+- ✅ 37,919 genes detected
+
+After DESeq2:
+- ✅ PCA: mock vs. Pst separated
+- ✅ DEGs: ~2-20% of genes
+- ✅ Top DEGs: MAPK, WRKY, NLR, PR genes UP ✓
+
+---
+
+## Parameter Testing Framework
+
+The agent tests these parameters and picks the best:
+
+| Tool | Option A (Specified) | Option B (Test) | Option C (Test) |
+|------|---------------------|-----------------|-----------------|
+| **Trim Galore** | Q20/30/3 | Q15/25/3 | Q25/35/3 |
+| **STAR** | genome SAindex=14 | - | - |
+| **featureCounts** | -s 2 (reverse) | -s 1 (fwd) | -s 0 (un) |
+| **DESeq2 design** | ~ condition | ~ 1 + cond | ~ cond * time |
+| **DESeq2 threshold** | \|FC\|≥1, p<0.05 | \|FC\|≥0.58 | \|FC\|≥1, p<0.1 |
+
+Agent picks best based on:
+- Biological sanity (expected genes?)
+- Statistical quality (clean separation?)
+- Computational efficiency
+
+---
+
+## Files You Need Now
+
+📄 **4 files in ~/rna-seq-pipeline-project/**:
+1. `autonomous-rna-seq-agent-prompt.md` ← The agent spec
+2. `master-invocation-guide.md` ← How to use it
+3. `invoke-rna-seq-agent.sh` ← Helper script
+4. `AUTONOMOUS_AGENT_SUMMARY.md` ← This summary
+
+Copy from: `/mnt/user-data/outputs/`
+
+---
+
+## Timeline
+
+| What | Time | Status |
+|-----|------|--------|
+| Copy files to project | 2 min | Now |
+| Review spec | 10 min | Now |
+| Invoke agent | 2 min | Now |
+| Claude generates | 10-15 min | Automatic |
+| Extract files | 10 min | After Claude |
+| Commit to git | 2 min | After extract |
+| **TOTAL SETUP** | **~35-45 min** | Ready today |
+| Test on Pombo | 30-60 min | Next step |
+
+---
+
+## Key Commands
+
+```bash
+# Copy files to project
+cp /mnt/user-data/outputs/autonomous-rna-seq-agent-prompt.md ~/rna-seq-pipeline-project/
+cp /mnt/user-data/outputs/master-invocation-guide.md ~/rna-seq-pipeline-project/
+cp /mnt/user-data/outputs/invoke-rna-seq-agent.sh ~/rna-seq-pipeline-project/
+chmod +x ~/rna-seq-pipeline-project/invoke-rna-seq-agent.sh
+
+# Invoke the agent
+cd ~/rna-seq-pipeline-project
+bash invoke-rna-seq-agent.sh
+# Then copy/paste into claude
+
+# After Claude finishes, extract files and commit
+git add -A && git commit -m "Agent-generated RNA-seq pipeline"
+
+# Later: Test on Pombo data
+conda activate rna-seq-pipeline
+./test_data.sh
+snakemake results/deseq2/volcano_plot.pdf --cores 20 --use-conda
+```
+
+---
+
+## What Gets Tested Biologically
+
+The agent validates:
+- **N. benthamiana specifics**: GC 45-48%, genome 3.5Gb, high repeats
+- **Pst infection**: PTI (1-2h) + ETI (2-4h) at 6h
+- **Expected DEGs**: MAPK, WRKY, NLR, PR genes should be UP
+- **Unexpected DEGs**: Random genes UP/DOWN = batch artifact (flag it)
+- **PCA clustering**: Replicates together, treatment separated
+
+---
+
+## Error Handling
+
+| Problem | Fix |
+|---------|-----|
+| Read retention <70% | Loosen quality: --quality 15 |
+| Mapping <75% | Lower SAindex to 13 |
+| %Assigned <85% | Verify strandedness is -s 2 |
+| DEGs 0 or >50% | Check PCA for batch effects |
+| Replicates scattered | Check for outliers, remove if justified |
+
+---
+
+## Documents to Read (In Order)
+
+1. **AUTONOMOUS_AGENT_SUMMARY.md** ← You are here (overview)
+2. **autonomous-rna-seq-agent-prompt.md** ← Agent specification
+3. **master-invocation-guide.md** ← Step-by-step instructions
+4. **Generated README.md** ← How to use the pipeline
+5. **VALIDATION_CHECKLIST.md** ← What to check at each step
+
+---
+
+## Next Action
+
+```bash
+# Go to project directory
+cd ~/rna-seq-pipeline-project
+
+# Option 1: Run the helper (EASIEST)
+bash invoke-rna-seq-agent.sh
+
+# Option 2: Follow master-invocation-guide.md manually
+cat master-invocation-guide.md
+
+# Then invoke Claude and wait for generation
+# Then extract files and test on Pombo data
+```
+
+---
+
+## You're Ready! 🚀
+
+The agent is fully configured to:
+✅ Generate a reproducible Snakemake pipeline
+✅ Validate on real data (Pombo)
+✅ Optimize parameters
+✅ Produce publication-ready code
+
+**Next step: Invoke the agent (today)**
+**Then: Test on Pombo data (tomorrow)**
+**Finally: Scale to your viral dataset (next week)**
+
+Questions? Refer to `master-invocation-guide.md` Troubleshooting section.
