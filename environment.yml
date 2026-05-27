@@ -2,17 +2,17 @@ name: rna-seq-pipeline
 channels:
   - bioconda
   - conda-forge
+  - defaults
 dependencies:
-  - falco=1.2.5
-  - fastqc=0.12.7
-  - multiqc=1.33
-  - trim-galore=0.6.11
-  - star=2.7.11b
-  - samtools=1.21
-  - subread=2.1.1
-  - r=4.5.3
-  - r-deseq2=1.50.2
+  - python=3.11
+  - snakemake-minimal
+  - star
+  - samtools
+  - subread
+  - trim-galore
+  - fastqc
+  - multiqc
+  - r-base
+  - r-deseq2
   - r-ggplot2
   - r-pheatmap
-  - snakemake=8.0.0
-  - gffread
