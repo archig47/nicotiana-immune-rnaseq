@@ -42,7 +42,7 @@ Reproducible RNA-seq pipeline characterising the transcriptional and cis-regulat
 ```
 nicotiana-immune-rnaseq/
 │
-├── pipeline/                          # ── Snakemake pipeline (plug-and-play) ──
+├── Reproducible RNA-seq pipeline/     # ── Snakemake pipeline (plug-and-play) ──
 │   ├── Snakefile                      #    8-rule workflow: QC→trim→align→count→DESeq2
 │   ├── config.yaml                    #    all parameters (fill in genome paths + reference)
 │   ├── environment.yml                #    pinned conda environment
@@ -51,24 +51,30 @@ nicotiana-immune-rnaseq/
 │   │   ├── deseq2_analysis.R          #    DESeq2 + PCA, volcano, MA, heatmap
 │   │   └── qc_plots.R                 #    publication-quality QC bar charts
 │   └── example_output/                #    real output from Ma et al. (2025) validation run
-│       ├── README.md                  #    what each file is + how to reproduce
-│       ├── deseq2_summary.txt         #    DEG counts, QC table
-│       └── plots/
-│           ├── pca_plot.png
-│           ├── volcano_D36E_vs_mock.png
-│           ├── heatmap_top50.png
-│           ├── qc_read_counts.png
-│           ├── qc_mapping_rate.png
-│           ├── qc_assigned_reads.png
-│           └── supplementary_figure_pipeline_validation.png
 │
-├── PRJNA945175/                       # ── FYP dataset scripts ──
-├── genome/                            #    NbT2T v12 genome resources
+├── Promoters and HOMER/               # ── Promoter extraction + motif enrichment ──
+│   ├── run_homer_all8.sh              #    all 8 HOMER pairwise comparisons (JASPAR2024)
+│   ├── extract_promoters.py           #    NLR promoter extraction
+│   ├── extract_all_prr_promoters.py   #    PRR promoter extraction
+│   ├── extract_subsets.py             #    condition-specific subsets
+│   └── extract_53.py
+│
+├── PRJNA945175/                       # ── FYP viral infection dataset ──
+│   ├── align_all.sh                   #    STAR alignment scripts
+│   ├── download_and_trim.sh           #    download + Trim Galore
+│   ├── featurecounts.sh               #    featureCounts counting
+│   ├── nlr_prr_full_landscape.xlsx    #    NLR/PRR classification table
+│   ├── nlr_prr_clean_summary.xlsx     #    cleaned NLR/PRR summary
+│   ├── NLR_phylogeneti_classification.xlsx  # NLR subclass assignments
+│   ├── figures/
+│   │   ├── R/                         #    R scripts for all thesis figures
+│   │   └── python/                    #    Python scripts for all thesis figures
+│   └── tables/                        #    Python scripts for appendix tables
+│
 ├── deseq2/
-│   └── deseq2_clean_rerun.R           #    full DESeq2 analysis (FYP dataset)
-├── figures/
-│   ├── R/                             #    R figure scripts (PRR/NLR plots)
-│   └── python/                        #    Python figure scripts (HOMER, scatter, dotplot)
+│   └── deseq2_clean_rerun.R           #    full DESeq2 analysis (9 contrasts)
+├── exploratory/                       #    MEME, GO enrichment, clust, rMATS (not in report)
+├── genome/                            #    NbT2T v12 genome resources
 └── README.md
 ```
 
@@ -101,7 +107,7 @@ The Snakemake pipeline (`Snakefile`) is a standalone, reusable version of this w
 ### Quick start
 
 ```bash
-cd pipeline/
+cd "Reproducible RNA-seq pipeline/"
 
 # 1. Create conda environment
 mamba env create -f environment.yml
@@ -120,7 +126,7 @@ snakemake -n --cores 1
 snakemake --cores 20
 ```
 
-See [`pipeline/example_output/`](pipeline/example_output/) for what the outputs look like when run on a real dataset (Ma et al. 2025, *N. benthamiana* bacterial infection, 9 samples).
+See [`Reproducible RNA-seq pipeline/example_output/`](Reproducible%20RNA-seq%20pipeline/example_output/) for what the outputs look like when run on a real dataset (Ma et al. 2025, *N. benthamiana* bacterial infection, 9 samples).
 
 ### ⚠️ Strandedness — check before running or counts will be wrong
 
