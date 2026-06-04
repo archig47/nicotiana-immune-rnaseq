@@ -65,3 +65,14 @@ GSE201377/multiqc_final/
 *.pid
 nohup.out
 *.bed
+
+# Snakemake pipeline outputs
+results/
+logs/
+.snakemake/
+samples.csv
+
+# OS noise
+.DS_Store
+*~
+*.swp

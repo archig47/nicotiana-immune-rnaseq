@@ -1,0 +1,64 @@
+# =============================================================================
+# RNA-seq Pipeline Configuration
+# =============================================================================
+# You only NEED to fill in the sections marked REQUIRED.
+# Everything else has sensible defaults that work for most datasets.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# REQUIRED: Point to your samples file
+# Copy samples_template.csv → samples.csv and fill it in before running.
+# -----------------------------------------------------------------------------
+samples_file: "samples.csv"
+
+# -----------------------------------------------------------------------------
+# REQUIRED: Genome paths
+# -----------------------------------------------------------------------------
+genome:
+  fasta: ""       # Path to genome FASTA file  e.g. "ref/genome.fa"
+  gtf:   ""       # Path to genome GTF annotation  e.g. "ref/annotation.gtf"
+
+  # If you already have a STAR index, provide the path here.
+  # Leave blank ("") to have the pipeline build one automatically.
+  # Building an index takes ~30-60 min for large (plant/mammalian) genomes
+  # and ~2-5 min for small (bacterial/yeast) genomes.
+  star_index: ""  # e.g. "ref/star_index/"
+
+# -----------------------------------------------------------------------------
+# REQUIRED: DESeq2 — set your reference/control condition name
+# This must exactly match one of the condition values in your samples.csv
+# -----------------------------------------------------------------------------
+deseq2:
+  reference_condition: "mock"   # e.g. "mock", "control", "WT", "untreated"
+  lfc_threshold: 1.0            # log2 fold change threshold for DEGs (1.0 = 2-fold)
+  padj_threshold: 0.05          # adjusted p-value threshold
+  top_n_heatmap: 50             # number of top DEGs to show in heatmap
+
+# -----------------------------------------------------------------------------
+# Strandedness — check your library kit documentation or run a strandedness
+# check (see README for how to do this automatically)
+# 0 = unstranded | 1 = forward-stranded | 2 = reverse-stranded (most common)
+# -----------------------------------------------------------------------------
+featurecounts:
+  strandedness: 2        # TruSeq, NEBNext, and most modern kits are reverse (2)
+  feature_type: "exon"
+  attribute:    "gene_id"
+
+# -----------------------------------------------------------------------------
+# Trimming — defaults work well for most Illumina RNA-seq
+# -----------------------------------------------------------------------------
+trim_galore:
+  quality:    20   # minimum Phred quality score
+  length:     30   # discard reads shorter than this after trimming
+  stringency:  3   # minimum adapter overlap to trigger trimming
+
+# -----------------------------------------------------------------------------
+# STAR alignment — defaults work for most datasets
+# Adjust genome_sa_index_nbases if building an index:
+#   ~11 for bacteria/fungi  |  ~13 for medium genomes  |  14-15 for large genomes
+# Adjust sjdb_overhang to (read_length - 1), e.g. 149 for 150 bp reads
+# -----------------------------------------------------------------------------
+star:
+  genome_sa_index_nbases: 14
+  sjdb_overhang:          149
+  multimapNmax:            20

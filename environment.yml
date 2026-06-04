@@ -1,0 +1,25 @@
+name: rnaseq-pipeline
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.11
+  - snakemake-minimal=7.32.4
+  - pandas=2.1.4
+  - fastqc=0.12.1
+  - multiqc=1.21
+  - trim-galore=0.6.10
+  - star=2.7.11b
+  - subread=2.0.6          # provides featureCounts
+  - samtools=1.19
+  - r-base=4.3.2
+  - bioconductor-deseq2=1.42.0
+  - bioconductor-apeglm=1.24.0
+  - r-ashr=2.2_63
+  - r-ggplot2=3.4.4
+  - r-pheatmap=1.0.12
+  - r-dplyr=1.1.4
+  - r-readr=2.1.5
+  - r-yaml=2.3.8
+  - r-ggrepel=0.9.5

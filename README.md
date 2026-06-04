@@ -1,5 +1,8 @@
 # Nicotiana benthamiana Immune Receptor RNA-seq Pipeline
 
+![Snakemake](https://img.shields.io/badge/snakemake-≥7.32-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
 **Author:** Archita Gupta  
 **Lab:** Kourelis Lab, Imperial College London  
 **Project:** FYP 2025–26
@@ -38,17 +41,24 @@ Reproducible RNA-seq pipeline characterising the transcriptional and cis-regulat
 
 ```
 nicotiana-immune-rnaseq/
+├── Snakefile                 # Plug-and-play pipeline (FastQC → trim → STAR → featureCounts → DESeq2)
+├── config.yaml               # All parameters — fill in genome paths + reference condition
+├── environment.yml           # Exact conda environment
+├── samples_template.csv      # Copy to samples.csv and fill in
+├── scripts/
+│   ├── deseq2_analysis.R     # DESeq2 + PCA, volcano, MA, heatmap
+│   └── qc_plots.R            # Publication-quality QC bar charts
 ├── PRJNA945175/              # Shell scripts for download, alignment, counting
 ├── genome/                   # Genome-related resources
 ├── deseq2/
-│   └── deseq2_clean_rerun.R  # Full DESeq2 analysis script
+│   └── deseq2_clean_rerun.R  # Full DESeq2 analysis (FYP dataset)
 ├── figures/
-│   ├── R/                    # R scripts for figure generation
+│   ├── R/                    # R figure scripts
 │   │   ├── pca_final.R
 │   │   ├── prr_heatmap_split_v3.R
 │   │   ├── prr_upset_v5.R
 │   │   └── nlr_prr_figures_v2.R
-│   └── python/               # Python scripts for figure generation
+│   └── python/               # Python figure scripts
 │       ├── prr_dotplot_v10.py
 │       ├── nlr_scatter_v5.py
 │       ├── prr_scatter_v1.py
@@ -74,6 +84,82 @@ nicotiana-immune-rnaseq/
 - **Assembly:** NbT2T (Chen et al., 2024, *Nature Plants*)
 - **Annotation:** Kourelis lab GFF3 v12 (99% BUSCO completeness, unpublished)
 - **NLR/PRR inventory:** 284 NLRs, 1,252 PRRs identified by NLRtracker/PRRtracker
+
+---
+
+## Snakemake Pipeline (plug-and-play)
+
+The Snakemake pipeline (`Snakefile`) is a standalone, reusable version of this workflow. It takes raw paired-end FASTQs and produces MultiQC reports, sorted BAMs, a gene count matrix, and full DESeq2 output (DEG tables + PCA / volcano / MA / heatmap).
+
+**Validated with:** Ma et al. (2025), PRJNA936199 — 9 samples, 3 conditions, 50 steps, 14,769 DEGs (D36E vs mock), ~95% mapping rate to NbT2T v12.
+
+### Quick start
+
+```bash
+# 1. Create conda environment
+mamba env create -f environment.yml
+conda activate rnaseq-pipeline
+
+# 2. Fill in your samples
+cp samples_template.csv samples.csv
+# edit samples.csv: one row per replicate (sample_id, condition, fastq_r1, fastq_r2)
+
+# 3. Edit config.yaml — set genome paths and reference_condition
+
+# 4. Dry run to verify
+snakemake -n --cores 1
+
+# 5. Run
+snakemake --cores 20
+```
+
+### ⚠️ Strandedness — check before running or counts will be wrong
+
+The default is `strandedness: 2` (reverse-stranded, correct for TruSeq/NEBNext). Wrong strandedness produces silently incorrect counts. After the first alignment:
+
+```bash
+awk 'NR>4 {s2+=$2; s3+=$3; s4+=$4}
+     END {print "unstranded:", s2, "\nforward:", s3, "\nreverse:", s4}' \
+    results/alignment/SAMPLE_NAME/ReadsPerGene.out.tab
+```
+
+| Output | `strandedness` value |
+|--------|---------------------|
+| `reverse` >> `forward` | `2` ✓ default |
+| `forward` >> `reverse` | `1` |
+| `forward` ≈ `reverse` | `0` |
+
+If you need to change it: update `featurecounts: strandedness:` in `config.yaml`, then:
+
+```bash
+snakemake --forcerun featurecounts --cores 20
+```
+
+### Pipeline outputs
+
+```
+results/
+├── qc/raw/multiqc_report.html           ← raw read QC
+├── qc/trimmed/multiqc_report_trimmed.html
+├── alignment/{sample}/
+│   ├── Aligned.sortedByCoord.out.bam    ← sorted BAM
+│   └── ReadsPerGene.out.tab             ← strandedness check
+├── counts/counts_matrix.tsv             ← gene count matrix
+└── deseq2/
+    ├── DEGs_full.csv / DEGs_significant.csv
+    ├── deseq2_summary.txt
+    └── plots/  pca_plot.pdf  volcano_plot.pdf  ma_plot.pdf  heatmap_top50.pdf
+```
+
+### Troubleshooting
+
+| Symptom | Likely cause | Fix |
+|---------|-------------|-----|
+| Mapping rate <60% | Wrong genome or STAR index mismatch | Check genome/GTF version match |
+| % Assigned very low | Wrong strandedness | Run strandedness check above |
+| DEGs = 0 | Wrong `reference_condition` or strandedness | Check config matches samples.csv |
+| `MissingInputException` | Wrong FASTQ path | `ls` each path in samples.csv |
+| `IncompleteFilesException` | Pipeline interrupted | `--rerun-incomplete` |
 
 ---
 

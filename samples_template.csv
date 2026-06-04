@@ -1,0 +1,16 @@
+sample_id,condition,fastq_r1,fastq_r2
+# Instructions:
+# - Copy this file to samples.csv and fill in your data (delete these comment lines)
+# - sample_id: a unique name for each sample (no spaces or special characters)
+# - condition: the experimental group — must match reference_condition in config.yaml
+# - fastq_r1: path to Read 1 FASTQ file (can be .fastq or .fastq.gz)
+# - fastq_r2: path to Read 2 FASTQ file (paired-end only; delete this column for single-end)
+# - Paths can be absolute or relative to the pipeline directory
+#
+# Example (paired-end):
+sample1_mock,mock,data/sample1_R1.fastq.gz,data/sample1_R2.fastq.gz
+sample2_mock,mock,data/sample2_R1.fastq.gz,data/sample2_R2.fastq.gz
+sample3_mock,mock,data/sample3_R1.fastq.gz,data/sample3_R2.fastq.gz
+sample1_treated,treated,data/sample1_treated_R1.fastq.gz,data/sample1_treated_R2.fastq.gz
+sample2_treated,treated,data/sample2_treated_R1.fastq.gz,data/sample2_treated_R2.fastq.gz
+sample3_treated,treated,data/sample3_treated_R1.fastq.gz,data/sample3_treated_R2.fastq.gz
