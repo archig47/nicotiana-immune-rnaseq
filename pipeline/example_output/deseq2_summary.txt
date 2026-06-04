@@ -1,0 +1,38 @@
+=== DESeq2 Summary ===
+
+Dataset:               Ma et al. (2025), PRJNA936199
+Organism:              Nicotiana benthamiana (NbT2T v12 genome)
+Conditions:            mock (n=3), D36E (n=3), dfliC (n=3)
+Reference condition:   mock
+Contrasts run:         D36E, dfliC
+
+Strandedness:          0 (unstranded — verified via ReadsPerGene.out.tab)
+LFC threshold:         1.00
+padj threshold:        0.050
+
+Genes after low-count filter: 36,554
+
+Total significant DEGs: 17,715
+
+D36E vs mock:
+  Upregulated:   7728
+  Downregulated: 7041
+
+dfliC vs mock:
+  Upregulated:   2291
+  Downregulated: 655
+
+=== QC summary ===
+
+Sample           Reads (M)   Mapped (%)   Assigned (%)
+mock_rep1          24.4         95.81         84.3
+mock_rep2          24.7         94.95         84.1
+mock_rep3          25.6         94.93         83.2
+D36E_rep1          23.4         95.44         84.4
+D36E_rep2          23.9         95.37         85.4
+D36E_rep3          26.2         95.51         84.7
+dfliC_rep1         21.8         95.11         82.8
+dfliC_rep2         20.2         94.75         84.1
+dfliC_rep3         23.3         95.34         83.3
+
+All samples pass thresholds (>20M reads, >75% mapped, >70% assigned).

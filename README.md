@@ -41,29 +41,34 @@ Reproducible RNA-seq pipeline characterising the transcriptional and cis-regulat
 
 ```
 nicotiana-immune-rnaseq/
-├── Snakefile                 # Plug-and-play pipeline (FastQC → trim → STAR → featureCounts → DESeq2)
-├── config.yaml               # All parameters — fill in genome paths + reference condition
-├── environment.yml           # Exact conda environment
-├── samples_template.csv      # Copy to samples.csv and fill in
-├── scripts/
-│   ├── deseq2_analysis.R     # DESeq2 + PCA, volcano, MA, heatmap
-│   └── qc_plots.R            # Publication-quality QC bar charts
-├── PRJNA945175/              # Shell scripts for download, alignment, counting
-├── genome/                   # Genome-related resources
+│
+├── pipeline/                          # ── Snakemake pipeline (plug-and-play) ──
+│   ├── Snakefile                      #    8-rule workflow: QC→trim→align→count→DESeq2
+│   ├── config.yaml                    #    all parameters (fill in genome paths + reference)
+│   ├── environment.yml                #    pinned conda environment
+│   ├── samples_template.csv           #    copy to samples.csv and fill in
+│   ├── scripts/
+│   │   ├── deseq2_analysis.R          #    DESeq2 + PCA, volcano, MA, heatmap
+│   │   └── qc_plots.R                 #    publication-quality QC bar charts
+│   └── example_output/                #    real output from Ma et al. (2025) validation run
+│       ├── README.md                  #    what each file is + how to reproduce
+│       ├── deseq2_summary.txt         #    DEG counts, QC table
+│       └── plots/
+│           ├── pca_plot.png
+│           ├── volcano_D36E_vs_mock.png
+│           ├── heatmap_top50.png
+│           ├── qc_read_counts.png
+│           ├── qc_mapping_rate.png
+│           ├── qc_assigned_reads.png
+│           └── supplementary_figure_pipeline_validation.png
+│
+├── PRJNA945175/                       # ── FYP dataset scripts ──
+├── genome/                            #    NbT2T v12 genome resources
 ├── deseq2/
-│   └── deseq2_clean_rerun.R  # Full DESeq2 analysis (FYP dataset)
+│   └── deseq2_clean_rerun.R           #    full DESeq2 analysis (FYP dataset)
 ├── figures/
-│   ├── R/                    # R figure scripts
-│   │   ├── pca_final.R
-│   │   ├── prr_heatmap_split_v3.R
-│   │   ├── prr_upset_v5.R
-│   │   └── nlr_prr_figures_v2.R
-│   └── python/               # Python figure scripts
-│       ├── prr_dotplot_v10.py
-│       ├── nlr_scatter_v5.py
-│       ├── prr_scatter_v1.py
-│       ├── homer_dotplot_v6.py
-│       └── qc_figures.py
+│   ├── R/                             #    R figure scripts (PRR/NLR plots)
+│   └── python/                        #    Python figure scripts (HOMER, scatter, dotplot)
 └── README.md
 ```
 
@@ -96,6 +101,8 @@ The Snakemake pipeline (`Snakefile`) is a standalone, reusable version of this w
 ### Quick start
 
 ```bash
+cd pipeline/
+
 # 1. Create conda environment
 mamba env create -f environment.yml
 conda activate rnaseq-pipeline
@@ -112,6 +119,8 @@ snakemake -n --cores 1
 # 5. Run
 snakemake --cores 20
 ```
+
+See [`pipeline/example_output/`](pipeline/example_output/) for what the outputs look like when run on a real dataset (Ma et al. 2025, *N. benthamiana* bacterial infection, 9 samples).
 
 ### ⚠️ Strandedness — check before running or counts will be wrong
 
