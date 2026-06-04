@@ -75,6 +75,9 @@ nicotiana-immune-rnaseq/
 │   ├── extract_nlr_prr_interpro.py    #    build NLR/PRR landscape from InterProScan + trackers
 │   ├── nlr_prr_clean_excel.R          #    generate expressed/DEG summary across 9 contrasts
 │   └── run_blastp_prr_vs_arabidopsis.sh #  BLASTp PRRs vs Arabidopsis Swiss-Prot for gene labels
+│   # NLRtracker/PRRtracker classification and NLR phylogenetic subclass
+│   # assignments were performed by the Kourelis laboratory (Kourelis et al.,
+│   # 2021, eLife; unpublished v12 annotation). Contact the lab for access.
 ├── deseq2/
 │   └── deseq2_clean_rerun.R           #    full DESeq2 analysis (9 contrasts)
 ├── exploratory/                       #    MEME, GO enrichment, clust, rMATS (not in report)
