@@ -11,11 +11,13 @@ viral infection (Gui et al., 2023; NCBI BioProject PRJNA945175).
 
 ## NLR/PRR Classification Scripts
 
+These scripts are located in `../NLR and PRR extraction/` at the root of the repository.
+
 | Script | Purpose |
 |--------|---------|
-| `extract_nlr_prr_interpro.py` | Parses InterProScan JSON output alongside NLRtracker and PRRtracker classifications to build the full NLR/PRR receptor landscape Excel file (`nlr_prr_full_landscape.xlsx`). Run once against the NbT2T v12 proteome. |
-| `nlr_prr_clean_excel.R` | Loads the landscape Excel and all 9 DESeq2 contrast results to produce `nlr_prr_clean_summary.xlsx` — tracking which receptors are annotated, expressed, and differentially expressed across conditions. |
-| `run_blastp_prr_vs_arabidopsis.sh` | Runs BLASTp of 1,252 PRR protein sequences against the *Arabidopsis thaliana* UniProt Swiss-Prot database (16,418 reviewed proteins) to assign closest Arabidopsis homologue labels used in Figure 8. |
+| `extract_nlr_prr_interpro.py` | Parses InterProScan JSON output alongside NLRtracker and PRRtracker classifications to build the full NLR/PRR receptor landscape Excel file (`nlr_prr_full_landscape.xlsx`). |
+| `nlr_prr_clean_excel.R` | Loads the landscape Excel and all 9 DESeq2 contrast results to produce `nlr_prr_clean_summary.xlsx`. |
+| `run_blastp_prr_vs_arabidopsis.sh` | Runs BLASTp of 1,252 PRR protein sequences against the *Arabidopsis thaliana* UniProt Swiss-Prot database to assign gene labels used in Figure 8. |
 
 ---
 

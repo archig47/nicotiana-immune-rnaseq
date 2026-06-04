@@ -71,10 +71,13 @@ nicotiana-immune-rnaseq/
 │   │   └── python/                    #    Python scripts for all thesis figures
 │   └── tables/                        #    Python scripts for appendix tables
 │
+├── NLR and PRR extraction/            # ── receptor identification pipeline ──
+│   ├── extract_nlr_prr_interpro.py    #    build NLR/PRR landscape from InterProScan + trackers
+│   ├── nlr_prr_clean_excel.R          #    generate expressed/DEG summary across 9 contrasts
+│   └── run_blastp_prr_vs_arabidopsis.sh #  BLASTp PRRs vs Arabidopsis Swiss-Prot for gene labels
 ├── deseq2/
 │   └── deseq2_clean_rerun.R           #    full DESeq2 analysis (9 contrasts)
 ├── exploratory/                       #    MEME, GO enrichment, clust, rMATS (not in report)
-├── genome/                            #    NbT2T v12 genome resources
 └── README.md
 ```
 
