@@ -43,7 +43,6 @@ which produces 9 independent virus-vs-mock contrasts (padj < 0.05, \|log₂FC\| 
 |------|---------|
 | `nlr_prr_full_landscape.xlsx` | Full NLR and PRR receptor classification (ectodomain, backbone, matched rules) for all 1,536 annotated receptors in the NbT2T v12 proteome |
 | `nlr_prr_clean_summary.xlsx` | Cleaned summary of expressed and differentially expressed NLRs and PRRs |
-| `NLR_phylogeneti_classification.xlsx` | NLR subclass assignments derived from maximum-likelihood phylogenetic analysis of NB-ARC domain sequences (CC-clade1/2, TIR, NRC-sensor-01/02, NRC-helper, TNP, Unclassified) |
 
 ---
 
